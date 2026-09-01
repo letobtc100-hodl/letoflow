@@ -1,4 +1,4 @@
-# ETF Flow · BTC/ETH 机构资金流看板
+# letoflow · BTC/ETH 机构资金流看板
 
 kzgflow 的简化版：纯静态站，无登录、无后端、任何设备打开即用。
 

@@ -1,7 +1,7 @@
 /* config.js — 全站配置真源：文案、配色、数据源参数、开关 */
 window.SITE_CONFIG = {
   meta: {
-    title: "ETF Flow · BTC/ETH 机构资金流看板",
+    title: "letoflow · BTC/ETH 机构资金流看板",
     lang: "zh-CN"
   },
   sources: {
