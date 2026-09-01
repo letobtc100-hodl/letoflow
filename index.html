@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ETF Flow · BTC/ETH 机构资金流看板</title>
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<nav class="topnav">
+  <div class="nav-inner">
+    <span class="brand">ETF Flow<span class="brand-sub">机构资金流看板</span></span>
+    <div class="nav-links">
+      <a href="#quotes">行情</a>
+      <a href="#fng">恐慌贪婪</a>
+      <a href="#etf">ETF 资金流</a>
+      <a href="#recent">近 6 交易日</a>
+    </div>
+  </div>
+</nav>
+<main>
+  <!-- 行情 -->
+  <section id="quotes">
+    <h2 class="section-title">行情
+      <span class="muted">Binance 现货 · 每 30 秒更新</span>
+      <span class="badge-src" id="src-price">—</span>
+    </h2>
+    <div class="quote-grid">
+      <div class="card">
+        <div class="quote-name">BTC <span class="muted">比特币</span></div>
+        <div class="quote-price" id="px-btc">—</div>
+        <div class="quote-chg" id="chg-btc"></div>
+      </div>
+      <div class="card">
+        <div class="quote-name">ETH <span class="muted">以太坊</span></div>
+        <div class="quote-price" id="px-eth">—</div>
+        <div class="quote-chg" id="chg-eth"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 恐慌贪婪 -->
+  <section id="fng">
+    <h2 class="section-title">恐慌与贪婪指数
+      <span class="muted">alternative.me · 近 120 天</span>
+      <span class="badge-src" id="src-fng">—</span>
+    </h2>
+    <div class="card">
+      <div class="fng-top">
+        <div>
+          <div class="fng-value" id="fng-value">—</div>
+          <div class="fng-label" id="fng-label"></div>
+        </div>
+        <div class="fng-scale">
+          <div class="fng-arrow" id="fng-arrow"></div>
+        </div>
+      </div>
+      <div class="fng-marks"><span>0 极度恐慌</span><span>50 中性</span><span>100 极度贪婪</span></div>
+      <div class="fng-stats">
+        <span>当前 <b id="fng-cur">—</b></span>
+        <span>7 日均值 <b id="fng-7d">—</b></span>
+        <span>30 日均值 <b id="fng-30d">—</b></span>
+      </div>
+      <div id="fng-chart" class="chart"></div>
+    </div>
+  </section>
+
+  <!-- ETF -->
+  <section id="etf">
+    <h2 class="section-title">现货 ETF 净流量
+      <span class="muted" id="etf-asof">Farside 统计口径</span>
+    </h2>
+
+    <div class="card">
+      <div class="panel-head">
+        <div class="panel-title">比特币现货 ETF <span class="badge" id="btc-cum">累计 —</span></div>
+        <div class="ctl">
+          <div class="seg" id="btc-unit">
+            <button data-v="day">日</button><button data-v="week">周</button><button data-v="month" class="on">月</button>
+          </div>
+          <div class="seg" id="btc-mode">
+            <button data-v="bar" class="on">柱状</button><button data-v="cum">累计</button>
+          </div>
+          <div class="seg" id="btc-range">
+            <button data-v="m1">1月</button><button data-v="m3">3月</button><button data-v="m6">6月</button><button data-v="y1">1年</button><button data-v="all" class="on">全部</button>
+          </div>
+        </div>
+      </div>
+      <div id="btc-chart" class="chart tall"></div>
+      <div class="stats-line" id="btc-stats"></div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <div class="panel-head">
+        <div class="panel-title">以太坊现货 ETF <span class="badge" id="eth-cum">累计 —</span></div>
+        <div class="ctl">
+          <div class="seg" id="eth-unit">
+            <button data-v="day">日</button><button data-v="week">周</button><button data-v="month" class="on">月</button>
+          </div>
+          <div class="seg" id="eth-mode">
+            <button data-v="bar" class="on">柱状</button><button data-v="cum">累计</button>
+          </div>
+          <div class="seg" id="eth-range">
+            <button data-v="m1">1月</button><button data-v="m3">3月</button><button data-v="m6">6月</button><button data-v="y1">1年</button><button data-v="all" class="on">全部</button>
+          </div>
+        </div>
+      </div>
+      <div id="eth-chart" class="chart tall"></div>
+      <div class="stats-line" id="eth-stats"></div>
+    </div>
+  </section>
+
+  <!-- 近6日 -->
+  <section id="recent">
+    <h2 class="section-title">近 6 个交易日 <span class="muted">单位：百万美元 · 正=净流入 · 红涨绿跌</span></h2>
+    <div class="card">
+      <table class="recent-table">
+        <thead><tr><th>日期</th><th>BTC 净流</th><th>ETH 净流</th><th>合计</th></tr></thead>
+        <tbody id="recent-body"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+<footer>
+  <p>数据口径：ETF 净流量来自 <a href="https://farside.co.uk" target="_blank" rel="noopener">Farside Investors</a>，更新滞后约 1 个交易日，以实际公布为准；行情来自 Binance 公开行情；恐慌贪婪指数来自 alternative.me。</p>
+  <p>本页面数据仅供参考，不构成投资建议。</p>
+</footer>
+<script src="assets/vendor/echarts.min.js"></script>
+<script src="config.js"></script>
+<script src="assets/flows.js"></script>
+<script src="assets/live.js"></script>
+<script src="assets/charts.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

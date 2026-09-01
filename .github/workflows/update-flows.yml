@@ -1,0 +1,21 @@
+name: update-flows
+on:
+  schedule:
+    - cron: '30 23 * * 1-5'   # 工作日 23:30 UTC = 北京时间 07:30（美东数据 20:30-22:00 UTC 已出）
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install curl_cffi
+      - run: python tools/update-flows.py --write
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore: update ETF flows'
+          file_pattern: assets/flows.js

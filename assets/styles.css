@@ -1,0 +1,87 @@
+/* ETF Flow 看板 — 克莱因蓝 #002FA7 纯白极简 */
+:root {
+  --accent: #002FA7;
+  --pos: #d4380d;      /* 红涨（中国习惯） */
+  --neg: #389e0d;      /* 绿跌 */
+  --ink: #111111;
+  --muted: #8c8c8c;
+  --border: #e8e8e8;
+  --bg: #ffffff;
+  --page: #fafafa;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--page); color: var(--ink); line-height: 1.5; font-size: 14px;
+}
+a { color: var(--accent); }
+
+/* 顶部导航 */
+.topnav { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+.nav-inner { max-width: 1080px; margin: 0 auto; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; }
+.brand { font-size: 17px; font-weight: 700; color: var(--accent); letter-spacing: .2px; }
+.brand-sub { font-size: 12px; font-weight: 400; color: var(--muted); margin-left: 8px; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: 13px; margin-left: 18px; transition: color .15s; }
+.nav-links a:hover { color: var(--accent); }
+
+main { max-width: 1080px; margin: 0 auto; padding: 28px 20px 64px; }
+section { margin-top: 40px; scroll-margin-top: 64px; }
+.section-title { font-size: 19px; font-weight: 700; margin-bottom: 14px; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.muted { font-size: 12px; color: var(--muted); font-weight: 400; }
+
+.card { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+
+/* 行情 */
+.quote-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+.quote-name { font-size: 13px; color: var(--muted); }
+.quote-price { font-size: 30px; font-weight: 700; font-variant-numeric: tabular-nums; margin: 6px 0 4px; letter-spacing: -.5px; }
+.quote-chg { font-size: 14px; font-weight: 600; }
+.up { color: var(--pos); }
+.down { color: var(--neg); }
+.flat { color: var(--muted); }
+
+/* 数据源状态角标 */
+.badge-src { font-size: 11px; color: var(--muted); border: 1px solid var(--border); border-radius: 20px; padding: 2px 10px; white-space: nowrap; }
+
+/* 恐慌贪婪 */
+.fng-top { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+.fng-value { font-size: 44px; font-weight: 800; font-variant-numeric: tabular-nums; color: var(--accent); }
+.fng-label { font-size: 13px; color: var(--muted); }
+.fng-scale { position: relative; flex: 1; min-width: 260px; height: 12px; border-radius: 8px; background: linear-gradient(90deg, #d4380d, #fa8c16, #fadb14, #73d13d, #389e0d); }
+.fng-arrow { position: absolute; top: -7px; width: 16px; height: 16px; background: var(--ink); border-radius: 4px; transform: rotate(45deg); transition: left .6s ease; }
+.fng-marks { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); margin: 14px 0 4px; }
+.fng-stats { display: flex; gap: 24px; font-size: 13px; color: var(--muted); margin: 6px 0 16px; flex-wrap: wrap; }
+.fng-stats b { color: var(--ink); font-variant-numeric: tabular-nums; margin-left: 4px; }
+.chart { width: 100%; height: 240px; }
+.chart.tall { height: 320px; }
+
+/* ETF 面板 */
+.panel-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+.panel-title { font-size: 15px; font-weight: 700; }
+.badge { font-size: 12px; font-weight: 600; color: var(--accent); background: rgba(0,47,167,.07); border-radius: 20px; padding: 3px 12px; margin-left: 8px; }
+.ctl { display: flex; gap: 8px; flex-wrap: wrap; }
+.seg { display: inline-flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.seg button { border: none; background: var(--bg); color: var(--muted); font-size: 12px; padding: 6px 12px; cursor: pointer; transition: all .15s; }
+.seg button + button { border-left: 1px solid var(--border); }
+.seg button:hover { color: var(--accent); }
+.seg button.on { background: var(--accent); color: #fff; }
+.stats-line { display: flex; gap: 22px; flex-wrap: wrap; font-size: 13px; color: var(--muted); margin-top: 10px; padding-top: 12px; border-top: 1px solid #f4f4f4; }
+.stats-line b { font-variant-numeric: tabular-nums; margin-left: 4px; }
+
+/* 近6日表 */
+.recent-table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.recent-table th { text-align: left; font-weight: 500; color: var(--muted); font-size: 12px; padding: 8px 12px; border-bottom: 1px solid var(--border); }
+.recent-table td { padding: 10px 12px; border-bottom: 1px solid #f4f4f4; }
+.recent-table tr:last-child td { border-bottom: none; }
+
+/* 页脚 */
+footer { max-width: 1080px; margin: 0 auto; padding: 24px 20px 40px; border-top: 1px solid var(--border); }
+footer p { font-size: 12px; color: var(--muted); line-height: 1.8; }
+
+@media (max-width: 640px) {
+  .quote-price { font-size: 24px; }
+  .fng-value { font-size: 34px; }
+  .nav-links a { margin-left: 12px; }
+  .stats-line { gap: 14px; }
+}
